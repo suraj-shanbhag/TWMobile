@@ -1,10 +1,15 @@
-from flask import Flask, request
+from flask import Flask, request, json
 
 from stations import Stations
 
 app = Flask(__name__)
 app.debug = True
 stations = Stations(path='../data/stations.csv').stations
+
+
+@app.route('/getAllStations/', methods=['GET'])
+def get_all_stations():
+    return json.jsonify(stations)
 
 
 @app.route('/validate/', methods=['GET'])
