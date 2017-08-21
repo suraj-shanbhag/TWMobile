@@ -32,17 +32,21 @@ if __name__ == "__main__":
     max_minute = to_minutes(max_seconds)
 
     count = 0
-    with open('data/schedule.csv', 'wb') as outcsv:
+    with open('data/schedule2.csv', 'wb') as outcsv:
         writer = csv.writer(outcsv)
-        writer.writerow(["start_code", "end_code", "day", "time_of_arrival"])
+        writer.writerow(["start_code", "end_code", "day", "time_of_arrival","cost","duration"])
         for station_1 in stations:
             for station_2 in stations:
                 if (station_1 != station_2):
+                    cost=random.randrange(start=100, stop=1000, step=50)
+                    duration = timedelta(minutes=(random.randrange(start=90, stop=720, step=5)))
                     for day in Days:
                         for i in range(15):
                             minute = random.randrange(start=0, stop=max_minute, step=5)
                             minute_delta = timedelta(minutes=minute)
                             time = start + minute_delta
                             count += 1
-                            writer.writerow([station_1,station_2,day,str(time)])
+                            cost_delta = random.randrange(start=-40, stop=40, step=5)
+                            duration_delta = timedelta(minutes=(random.randrange(start=-20, stop=20, step=2)))
+                            writer.writerow([station_1,station_2,day,str(time),str(cost+cost_delta),str(duration+duration_delta)])
         print count
