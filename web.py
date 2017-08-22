@@ -1,11 +1,12 @@
-from flask import Flask, request, json
-
 import psycopg2
+from flask import Flask, request, json
 
 from src.stations import Stations
 
 try:
-    connection = psycopg2.connect(database="twmobile", user="surajus", host="localhost", port=5432)
+    connection = psycopg2.connect(database="d641qm9k3ulc1o", user="qjsyryvmvxwmol",
+                                  host="ec2-107-22-167-179.compute-1.amazonaws.com", port=5432,
+                                  password="6f388937e1b6ecd4f1ee16eca44048295fc1a6e8aa31a269d0730d4de6571c47")
 except:
     print "Try again"
 
@@ -18,6 +19,11 @@ cursor = connection.cursor()
 @app.route('/getAllStations/', methods=['GET'])
 def get_all_stations():
     return json.jsonify(stations)
+
+
+@app.route('/', methods=['GET'])
+def welcome():
+    return "Server is Hot"
 
 
 @app.route('/validate/', methods=['GET'])
