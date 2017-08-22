@@ -1,7 +1,8 @@
 from flask import Flask, request, json
 
 import psycopg2
-from stations import Stations
+
+from src.stations import Stations
 
 try:
     connection = psycopg2.connect(database="twmobile", user="surajus", host="localhost", port=5432)
