@@ -11,7 +11,7 @@ except:
 
 app = Flask(__name__)
 app.debug = True
-stations = Stations(path='../data/stations.csv').stations
+stations = Stations(path='./data/stations.csv').stations
 cursor = connection.cursor()
 
 
