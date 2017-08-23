@@ -12,11 +12,11 @@ except:
 
 app = Flask(__name__)
 app.debug = True
-stations = Stations(path='./data/stations.csv').stations
 cursor = connection.cursor()
+stations = Stations(cursor=cursor).stations
 
 
-@app.route('/getAllStations/', methods=['GET'])
+@app.route('/stations/', methods=['GET'])
 def get_all_stations():
     return json.jsonify(stations)
 
@@ -62,5 +62,5 @@ def fetch_schedule():
     return fetchschedule(search_parameters, limit)
 
 
-# if __name__ == '__main__':
-app.run(host='0.0.0.0', port=8000)
+if __name__ == '__main__':
+    app.run(use_reloader=True)

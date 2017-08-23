@@ -1,15 +1,12 @@
-import csv
-
-
 class Stations(object):
-    def __init__(self, path):
-        self.path = path
+    def __init__(self, cursor):
+        self.cursor = cursor
         self.stations = self.get_stations()
 
     def get_stations(self):
-        with open(self.path, 'rb') as f:
-            reader = csv.reader(f)
-            stations = {}
-            for line in reader:
-                stations[line[0]] = line[1]
-            return stations
+        self.cursor.execute('SELECT * FROM stations')
+        result = self.cursor.fetchall()
+        stations = {}
+        for line in result:
+            stations[line[0]] = line[1]
+        return stations
