@@ -22,6 +22,10 @@ schedule = Schedule(cursor=cursor)
 def get_all_stations():
     return json.jsonify(stations)
 
+@app.route('/book/', methods=['GET'])
+def get_all_stations():
+    return "Your ticket has been booked \nThanks For your interest have a safe journey"
+
 
 @app.route('/', methods=['GET'])
 def welcome():
