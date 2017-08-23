@@ -23,7 +23,7 @@ def get_all_stations():
     return json.jsonify(stations)
 
 @app.route('/book/', methods=['GET'])
-def get_all_stations():
+def book_results():
     return "Your ticket has been booked \nThanks For your interest have a safe journey"
 
 
