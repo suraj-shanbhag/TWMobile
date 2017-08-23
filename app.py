@@ -1,6 +1,7 @@
 import psycopg2
 from flask import Flask, request, json
 
+from src.schedule import Schedule
 from src.stations import Stations
 
 try:
@@ -14,6 +15,7 @@ app = Flask(__name__)
 app.debug = True
 cursor = connection.cursor()
 stations = Stations(cursor=cursor).stations
+schedule = Schedule(cursor=cursor)
 
 
 @app.route('/stations/', methods=['GET'])
@@ -34,33 +36,12 @@ def validate_station():
     return "Invalid Station"
 
 
-def fetchschedule(parameters, limit):
-    cursor.execute(
-        "SELECT * FROM SCHEDULE WHERE start_code='%s' and end_code='%s' and day='%s' and time_of_arrival>='%s' order by time_of_arrival limit %s" \
-        % (parameters['source'], parameters['destination'], parameters['day'], parameters['time'], limit))
-    return json.jsonify(dicnarify(cursor.fetchall()))
-
-
-def dicnarify(results):
-    result = {"source": results[0][0], "destination": results[0][1]}
-    schedule = []
-    for row in results:
-        item = {}
-        item['time'] = str(row[3])
-        item['cost'] = row[4]
-        item['duration'] = str(row[5])
-        schedule.append(item)
-
-    result["schedule"] = schedule
-    return result
-
-
 @app.route('/schedule/', methods=['GET'])
 def fetch_schedule():
     search_parameters = request.args
     limit = 5
-    return fetchschedule(search_parameters, limit)
-
+    obtained_schedule = schedule.get_schedule(search_parameters, limit)
+    return json.jsonify(obtained_schedule)
 
 if __name__ == '__main__':
     app.run(use_reloader=True)
