@@ -1,26 +1,33 @@
-import psycopg2
+import psycopg2, os
 from flask import Flask, request, json
 
 from src.schedule import Schedule
 from src.stations import Stations
 
 try:
-    connection = psycopg2.connect(database="d641qm9k3ulc1o", user="qjsyryvmvxwmol",
-                                  host="ec2-107-22-167-179.compute-1.amazonaws.com", port=5432,
-                                  password="6f388937e1b6ecd4f1ee16eca44048295fc1a6e8aa31a269d0730d4de6571c47")
+    database = os.environ.get('DATABASE')
+    user = os.environ.get('USER')
+    host = os.environ.get('HOST')
+    port = os.environ.get('PORT')
+    password = os.environ.get('PASSWORD')
+    connection = psycopg2.connect(database=database, user=user,
+                                  host=host, port=port,
+                                  password=password)
 except:
-    print "Try again"
+    exit('Cannot connect to Database')
 
-app = Flask(__name__)
-app.debug = True
 cursor = connection.cursor()
 stations = Stations(cursor=cursor).stations
 schedule = Schedule(cursor=cursor)
+
+app = Flask(__name__)
+app.debug = True
 
 
 @app.route('/stations/', methods=['GET'])
 def get_all_stations():
     return json.jsonify(stations)
+
 
 @app.route('/book/', methods=['GET'])
 def book_results():
@@ -46,6 +53,7 @@ def fetch_schedule():
     limit = 5
     obtained_schedule = schedule.get_schedule(search_parameters, limit)
     return json.jsonify(obtained_schedule)
+
 
 if __name__ == '__main__':
     app.run(use_reloader=True)
