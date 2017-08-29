@@ -1,5 +1,5 @@
 import psycopg2, os
-from flask import Flask, request, json
+from flask import Flask, request, json, render_template
 
 from src.schedule import Schedule
 from src.stations import Stations
@@ -31,7 +31,7 @@ def get_all_stations():
 
 @app.route('/book/', methods=['GET'])
 def book_results():
-    return "Your ticket has been booked \nThanks For your interest have a safe journey"
+    return render_template('ticket.html', booking=request.args)
 
 
 @app.route('/', methods=['GET'])

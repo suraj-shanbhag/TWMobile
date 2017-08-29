@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Ticket</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/ticket.css') }}">
+
+</head>
+    <body>
+        <div id="ticket">
+        <h3>Ticket Booked</h3>
+
+            <table>
+                <tr>
+                    <td>
+                        From
+                    </td>
+                    <td>
+                        {{ booking['source'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        To
+                    </td>
+                    <td>
+                        {{ booking['destination'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Date
+                    </td>
+                    <td>
+                        {{ booking['day'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Time
+                    </td>
+                    <td>
+                        {{ booking['time'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Seats
+                    </td>
+                    <td>
+                        {{ booking['seat'] }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <input type="button" onclick="printDiv('ticket')" value="Print" />
+        <script type="text/javascript" src="{{ url_for('static', filename='js/print.js') }}"></script>
+    </body>
+</html>
