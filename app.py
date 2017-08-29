@@ -14,7 +14,7 @@ try:
                                   host=host, port=port,
                                   password=password)
 except:
-    exit('Cannot connect to Database')
+    print ('Cannot connect to Database')
 
 cursor = connection.cursor()
 stations = Stations(cursor=cursor).stations
