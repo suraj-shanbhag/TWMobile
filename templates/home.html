@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Booking</title>
+</head>
+<body>
+<form action="/search/" method="get">
+    From: <select id="source" name="source" required>
+                <option value="">--Select--</option>
+            {% for station in stations %}
+                <option value="{{stations[station]}}">{{station}}</option>
+            {% endfor %}
+        </select><br>
+    Destination: <select id="destination" name="destination" required>
+                <option value="">--Select--</option>
+            {% for station in stations %}
+                <option value="{{stations[station]}}">{{station}}</option>
+            {% endfor %}
+        </select><br>
+    Day: <input required type="date" name="day"><br>
+    Time: <input required type="time" name="time"><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

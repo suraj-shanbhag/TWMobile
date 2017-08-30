@@ -36,7 +36,7 @@ def book_results():
 
 @app.route('/', methods=['GET'])
 def welcome():
-    return "Server is Hot"
+    return render_template('home.html', stations=stations)
 
 
 @app.route('/validate/', methods=['GET'])
@@ -53,6 +53,14 @@ def fetch_schedule():
     limit = 5
     obtained_schedule = schedule.get_schedule(search_parameters, limit)
     return json.jsonify(obtained_schedule)
+
+
+@app.route('/search/', methods=['GET'])
+def search():
+    search_parameters = request.args
+    limit = 5
+    obtained_schedule = schedule.get_schedule(search_parameters, limit)
+    return render_template('search.html', result=obtained_schedule)
 
 
 if __name__ == '__main__':

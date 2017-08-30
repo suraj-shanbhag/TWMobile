@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+    <table>
+        <thead><tr><th>Sr No</th><th>Arrival Time</th><th>Duration</th><th>Seats</th><th>Book</th></tr></thead>
+        {% for train in result.schedule %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{train.time}}</td>
+                <td>{{train.duration}}</td>
+                <td><input type="number" min="1" max="10" required></td>
+                <td><button type="button" onclick="book({{train}})"> <b>{{train.cost}}Rs</b></button></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/book.js') }}"></script>
+</body>
+</html>
