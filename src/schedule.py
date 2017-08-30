@@ -2,7 +2,8 @@ import datetime
 
 
 class Schedule(object):
-    def __init__(self, cursor):
+    def __init__(self, cursor, stations):
+        self.stations = stations
         self.cursor = cursor
 
     def get_schedule(self, parameters, limit):
@@ -13,15 +14,17 @@ class Schedule(object):
         return self._dicnarify(self.cursor.fetchall(), parameters)
 
     def _dicnarify(self, results, parameters):
-        result = {"source": parameters['source'],
-                  "destination": parameters['destination'],
-                  "day": parameters['day']}
+        station_names = self.stations.keys()
+        station_codes = self.stations.values()
+        source = station_names[station_codes.index(parameters['source'])]
+        destination = station_names[station_codes.index(parameters['destination'])]
+        result = {"source": source,
+                  "destination": destination,
+                  "day": parameters['day'],
+                  "time": parameters['time']}
         schedule = []
         for row in results:
-            item = {}
-            item['time'] = str(row[3])
-            item['cost'] = row[4]
-            item['duration'] = str(row[5])
+            item = {'time': str(row[3]), 'cost': row[4], 'duration': str(row[5])}
             schedule.append(item)
         result["schedule"] = schedule
         return result

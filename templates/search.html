@@ -2,11 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Search</title>
+    <title>Search Results</title>
 </head>
 <body>
-{{result}}
-    <table>
+<h3>Search Results</h3>
+<table>
+    <tr><td>From</td><td>: {{ result.source }}</td></tr>
+    <tr><td>To</td><td>: {{ result.destination }}</td></tr>
+    <tr><td>Journey Date</td><td>: {{ result.day }}</td></tr>
+    <tr><td>Time</td><td>: {{ result.time }} onwards</td></tr>
+</table>
+<table>
         <thead><tr><th>Sr No</th><th>Arrival Time</th><th>Duration</th><th>Seats</th><th>Book</th></tr></thead>
         {% for train in result.schedule %}
             <tr>

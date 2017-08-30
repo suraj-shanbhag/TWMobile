@@ -18,7 +18,7 @@ except:
 
 cursor = connection.cursor()
 stations = Stations(cursor=cursor).stations
-schedule = Schedule(cursor=cursor)
+schedule = Schedule(cursor=cursor, stations=stations)
 
 app = Flask(__name__)
 app.debug = True
