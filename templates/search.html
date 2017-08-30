@@ -5,18 +5,26 @@
     <title>Search</title>
 </head>
 <body>
+{{result}}
     <table>
         <thead><tr><th>Sr No</th><th>Arrival Time</th><th>Duration</th><th>Seats</th><th>Book</th></tr></thead>
         {% for train in result.schedule %}
             <tr>
-                <td>{{loop.index}}</td>
-                <td>{{train.time}}</td>
-                <td>{{train.duration}}</td>
-                <td><input type="number" min="1" max="10" required></td>
-                <td><button type="button" onclick="book({{train}})"> <b>{{train.cost}}Rs</b></button></td>
+                <form action="/book/" method="get">
+                    <td>{{loop.index}}</td>
+                    <td>{{train.time}}</td>
+                    <td>{{train.duration}}</td>
+                    <td><input name="seat" type="number" min="1" max="10" placeholder="0" required></td>
+                    <td><input type="submit" value="{{train.cost}}Rs"></td>
+                    <input name="source" value="{{result.source}}" hidden>
+                    <input name="destination" value="{{result.destination}}" hidden>
+                    <input name="day" value="{{result.day}}" hidden>
+                    <input name="time" value="{{train.time}}" hidden>
+                    <input name="duration" value="{{train.duration}}" hidden>
+                    <input name="cost" value="{{train.cost}}" hidden>
+                </form>
             </tr>
         {% endfor %}
     </table>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/book.js') }}"></script>
 </body>
 </html>

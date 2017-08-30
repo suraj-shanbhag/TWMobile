@@ -9,56 +9,14 @@
     <body>
         <div id="ticket">
         <h3>Ticket Booked</h3>
-
             <table>
-                <tr>
-                    <td>
-                        From
-                    </td>
-                    <td>
-                        {{ booking['source'] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        To
-                    </td>
-                    <td>
-                        {{ booking['destination'] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Date
-                    </td>
-                    <td>
-                        {{ booking['day'] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Time
-                    </td>
-                    <td>
-                        {{ booking['dept_time'] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Duration
-                    </td>
-                    <td>
-                        {{ booking['duration'] }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Seats
-                    </td>
-                    <td>
-                        {{ booking['seat'] }}
-                    </td>
-                </tr>
+                <tr><td>From</td><td>{{ booking.source }}</td></tr>
+                <tr><td>To</td><td>{{ booking.destination }}</td></tr>
+                <tr><td>Date</td><td>{{ booking.day }}</td></tr>
+                <tr><td>Time</td><td>{{ booking.time }}</td></tr>
+                <tr><td>Duration</td><td>{{ booking.duration }}</td></tr>
+                <tr><td>Seats</td><td>{{ booking.seat }}</td></tr>
+                <tr><td>Total Cost</td><td>{{ booking.total }}</td>
             </table>
         </div>
         <input type="button" onclick="window.print()" value="Print" />
