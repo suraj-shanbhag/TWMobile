@@ -8,7 +8,7 @@ try:
     database = os.environ.get('DATABASE')
     user = os.environ.get('USER')
     host = os.environ.get('HOST')
-    port = os.environ.get('PORT')
+    port = 5432
     password = os.environ.get('PASSWORD')
     connection = psycopg2.connect(database=database, user=user,
                                   host=host, port=port,

@@ -10,10 +10,12 @@ class Schedule(object):
         query = "SELECT * FROM SCHEDULE WHERE start_code='%s' and end_code='%s' and day='%s' and time_of_arrival>='%s' order by time_of_arrival limit %s" % (
             parameters['source'], parameters['destination'], day, parameters['time'], limit)
         self.cursor.execute(query)
-        return self._dicnarify(self.cursor.fetchall())
+        return self._dicnarify(self.cursor.fetchall(), parameters)
 
-    def _dicnarify(self, results):
-        result = {"source": results[0][0], "destination": results[0][1]}
+    def _dicnarify(self, results, parameters):
+        result = {"source": parameters['source'],
+                  "destination": parameters['destination'],
+                  "day": parameters['day']}
         schedule = []
         for row in results:
             item = {}
