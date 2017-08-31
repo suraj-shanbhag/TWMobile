@@ -19,7 +19,10 @@
                 <tr><td>Total Cost</td><td>{{ booking.total }}</td>
             </table>
         </div>
-        <input type="button" onclick="window.print()" value="Print" />
+        <form onsubmit="mail('ticket')">
+            <input type="email" name="email" required placeholder="yourEmail@someDomain.com">
+            <input type="submit" value="Email Ticket" />
+        </form><input type="button" onclick="printDiv('ticket')" value="Print Ticket" />
         <script type="text/javascript" src="{{ url_for('static', filename='js/print.js') }}"></script>
     </body>
 </html>
