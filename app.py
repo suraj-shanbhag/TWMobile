@@ -31,9 +31,7 @@ def get_all_stations():
 
 @app.route('/book/', methods=['GET'])
 def book_results():
-    booking = request.args.copy()
-    booking['total'] = float(booking['seat']) * float(booking['cost'])
-    return render_template('ticket.html', booking=booking)
+    return render_template('ticket.html', booking=request.args)
 
 
 @app.route('/', methods=['GET'])
