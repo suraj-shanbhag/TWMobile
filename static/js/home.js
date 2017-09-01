@@ -15,7 +15,9 @@ function setMinValues() {
     var today = new Date();
     var date = today.getDate();
     var month = parseInt(today.getMonth()) + 1;
-    month = ("0" + month).slice(-2);
     var year = today.getFullYear();
+    month = ("0" + month).slice(-2);
+    date = ("0" + date).slice(-2);
+    year = ("000" + year).slice(-4);
     day.setAttribute('min', year + '-' + month + '-' + date);
 }
