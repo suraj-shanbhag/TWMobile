@@ -19,10 +19,18 @@
                 <tr><td>Total Cost</td><td>{{ booking.total_cost }}</td>
             </table>
         </div>
-        <form onsubmit="mail('ticket')">
+        <form action="/email/"  onsubmit="mail()">
+            <input name="source" value="{{booking.source}}" hidden>
+            <input name="destination" value="{{booking.destination}}" hidden>
+            <input name="day" value="{{booking.day}}" hidden>
+            <input name="time" value="{{booking.time}}" hidden>
+            <input name="duration" value="{{booking.duration}}" hidden>
+            <input name="seat" value="{{booking.seat}}" hidden>
+            <input name="total_cost" value="{{booking.total_cost}}" hidden>
             <input type="email" name="email" required placeholder="yourEmail@someDomain.com">
-            <input type="submit" value="Email Ticket" />
-        </form><input type="button" onclick="printDiv('ticket')" value="Print Ticket" />
+            <input type="submit" value="Email Ticket"/>
+        </form>
+        <div id="message" hidden></div>
         <script type="text/javascript" src="{{ url_for('static', filename='js/print.js') }}"></script>
     </body>
 </html>
