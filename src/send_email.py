@@ -40,7 +40,7 @@ class EmailClient(object):
         configuration = Configuration(wkhtmltopdf='/app/bin/wkhtmltopdf')
         pdf = pdfkit.from_string("Hello There", False, configuration=configuration)
         attachment = MIMEBase('application', 'octet-stream')
+        attachment.set_payload(pdf)
         encoders.encode_base64(attachment)
         attachment.add_header('Content-Disposition', "attachment; filename= Ticket")
-        attachment.set_payload(pdf)
         return attachment
