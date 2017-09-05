@@ -16,6 +16,7 @@ class EmailClient(object):
 
     def _get_mail_client(self):
         mail_client = smtplib.SMTP(host=self.host, port=self.port)
+        mail_client.ehlo()
         mail_client.starttls()
         mail_client.login(user=self.user_id, password=self.password)
         return mail_client
