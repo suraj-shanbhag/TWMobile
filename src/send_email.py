@@ -54,7 +54,7 @@ def generate_pdf(ticket_info):
     for key, value in ticket_info.iteritems():
         data = data.replace(str(key), str(value))
     options = {
-        'page-size': 'A7',
+        'page-size': 'A5',
         'encoding': "UTF-8",
         'custom-header': [
             ('Accept-Encoding', 'gzip')
