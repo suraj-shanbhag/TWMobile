@@ -1,0 +1,20 @@
+table {
+    width:50%;
+    margin: auto;
+}
+
+img {
+    width: 25%;
+    margin: auto;
+    padding-left: 37.5%;
+}
+
+h2 {
+    text-align: center;
+}
+
+td, table {
+    border:double black 1px;
+    text-align: center;
+}
+
