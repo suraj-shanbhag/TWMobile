@@ -1,3 +1,4 @@
+import os
 import smtplib
 from email import encoders
 from email.mime.base import MIMEBase
@@ -5,6 +6,8 @@ from email.mime.multipart import MIMEMultipart
 
 import pdfkit
 from pdfkit.configuration import Configuration
+
+from settings import ASSETS
 
 
 class EmailClient(object):
@@ -22,8 +25,8 @@ class EmailClient(object):
         return mail_client
 
     def send_ticket(self, ticket_info):
-        mail_client = self._get_mail_client()
         message = self._get_ticket(ticket_info)
+        mail_client = self._get_mail_client()
         mail_client.sendmail(from_addr=self.user_id, to_addrs=ticket_info['email'], msg=message)
         mail_client.quit()
 
@@ -32,15 +35,32 @@ class EmailClient(object):
         message['Subject'] = "Train Ticket"
         message['From'] = "Travel Agent"
         message['To'] = ticket_info['email']
-        attachment = self._get_ticket_attachment()
+        attachment = self._get_ticket_attachment(ticket_info)
         message.attach(attachment)
         return message.as_string()
 
-    def _get_ticket_attachment(self):
-        configuration = Configuration(wkhtmltopdf='/app/bin/wkhtmltopdf')
-        pdf = pdfkit.from_string("Hello There", False, configuration=configuration)
+    def _get_ticket_attachment(self, ticket_info):
+        pdf = generate_pdf(ticket_info)
         attachment = MIMEBase('application', 'octet-stream')
         attachment.set_payload(pdf)
         encoders.encode_base64(attachment)
         attachment.add_header('Content-Disposition', "attachment; filename= Ticket")
         return attachment
+
+
+def generate_pdf(ticket_info):
+    with open(os.path.join(ASSETS, 'ticket.html'), 'rb') as f:
+        data = f.read()
+    for key, value in ticket_info.iteritems():
+        data = data.replace(str(key), str(value))
+    options = {
+        'page-size': 'A7',
+        'encoding': "UTF-8",
+        'custom-header': [
+            ('Accept-Encoding', 'gzip')
+        ],
+        'quiet': '',
+        'no-outline': None
+    }
+    configuration = Configuration(wkhtmltopdf='/app/bin/wkhtmltopdf')
+    return pdfkit.from_string(data, False, options=options, css=os.path.join(ASSETS, 'ticket.css'), configuration=configuration)

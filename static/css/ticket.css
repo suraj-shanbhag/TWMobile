@@ -1,3 +1,24 @@
 table {
+    width:50%;
+    margin: auto;
+}
+
+h2 {
+    width: fit-content;
+    margin: auto;
+}
+
+td, table {
+    border:double black 1px;
+    text-align: center;
+}
+
+input {
     width: 100%;
+    text-align: center;
+}
+
+#input {
+    margin: auto;
+    width: 50%;
 }

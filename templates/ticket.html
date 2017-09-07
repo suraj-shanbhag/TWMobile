@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -8,7 +7,7 @@
 </head>
     <body>
         <div id="ticket">
-        <h3>Ticket Booked</h3>
+            <h2>Ticket Booked</h2><br>
             <table>
                 <tr><td>From</td><td>{{ booking.source }}</td></tr>
                 <tr><td>To</td><td>{{ booking.destination }}</td></tr>
@@ -27,8 +26,10 @@
             <input name="duration" value="{{booking.duration}}" hidden>
             <input name="seat" value="{{booking.seat}}" hidden>
             <input name="total_cost" value="{{booking.total_cost}}" hidden>
-            <input type="email" name="email" required placeholder="yourEmail@someDomain.com">
-            <input type="submit" value="Email Ticket"/>
+            <div id="input">
+                <input type="email" name="email" required placeholder="yourEmail@someDomain.com">
+                <input type="submit" value="Email Ticket"/>
+            </div>
         </form>
         <div id="message" hidden></div>
         <script type="text/javascript" src="{{ url_for('static', filename='js/print.js') }}"></script>
