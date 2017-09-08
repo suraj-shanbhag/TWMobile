@@ -12,13 +12,3 @@ td, table {
     border:double black 1px;
     text-align: center;
 }
-
-input {
-    width: 100%;
-    text-align: center;
-}
-
-#input {
-    margin: auto;
-    width: 50%;
-}

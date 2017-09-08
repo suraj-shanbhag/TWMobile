@@ -17,6 +17,21 @@
                 <tr><td>Seats</td><td>{{ booking.seat }}</td></tr>
                 <tr><td>Total Cost</td><td>{{ booking.total_cost }}</td>
             </table>
+            <h3>General Instructions</h3>
+            <section>
+                <ul>
+                    <li>Please carry an id proof.</li>
+                    <li>Arrive at the station at least 15 minutes early.</li>
+                    <li>Thank You for choosing us. And we wish you a Happy and Safe Journey.</li>
+                </ul>
+            </section>
+            <h3>Mail Ticket</h3>
+            <section>
+                <ul>
+                    <li>The ticket will be sent in a mail to you.</li>
+                    <li>Please enter your email address in the box and Click Email Ticket.</li>
+                </ul>
+            </section>
         </div>
         <form action="/email/"  onsubmit="mail()">
             <input name="source" value="{{booking.source}}" hidden>
